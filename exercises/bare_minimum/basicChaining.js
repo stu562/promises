@@ -1,3 +1,5 @@
+import { read } from 'fs';
+
 /*
  * Write a function WITH NO CALLBACKS that,
  * (1) reads a GitHub username from a `readFilePath`
@@ -15,7 +17,22 @@ var Promise = require('bluebird');
 
 var fetchProfileAndWriteToFile = function(readFilePath, writeFilePath) {
   // TODO
+  return new Promise((resolve, reject)=>{
+    fs.readFile(readFilePath, 'utf8', (err, file) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(file);
+      }
+    });
+  })
 };
+
+var userName = fetchProfileAndWriteToFile(readFilePath, writeFilePath);
+userName.then((file)=>{
+  var firstLine = file.split('\n')[0];
+  
+})
 
 // Export these functions so we can test them
 module.exports = {
